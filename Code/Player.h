@@ -6,6 +6,19 @@
 #include <vector>
 #include "Card.h"
 
+/*
+*@brief The player class holds all the data on the player. Names, tokens, points, crowns, priveleges, and cards.
+* - Tokens are stored in an array, where the index corresponds to the type of token. This includes gold tokens (wildcards).
+* - totalPoints are an aggregate from the boughtCards.
+* - crowns are an aggregate from the boughtCards.
+* - privelges have a constraint of three total. Stored as an int since they are only used for an action,
+* thus deduction is only needed, and an object does not need to exist. Needs extra logic to prevent fluctations of privelges across the board and players.
+* - reservedCards are stored in a vector, however they can only have three at max.
+* - boughtCards are stored in a vector, there is no limit to how many cards a player can buy.
+* 
+* @author Joseph Corella
+* @date 2026-03-08
+*/
 class Player {
     public:
         //getters and setters
@@ -32,15 +45,15 @@ class Player {
         void addBoughtCard(const Card& card){ boughtCards.push_back(card); };
 
     private:
-        std::string name; //name of player
+        std::string name;
         
-        int tokens[7]; //number of tokens the player has
-        int totalPoints; //number of points the player has
-        int crowns; //number of crowns the player has
-        int priveleges; //number of priveleges the player has
+        int tokens[7];
+        int totalPoints;
+        int crowns;
+        int priveleges;
 
-        std::vector<Card> reservedCards; //cards reserved by the player
-        std::vector<Card> boughtCards; //number of cards reserved by the player
+        std::vector<Card> reservedCards;
+        std::vector<Card> boughtCards;
 
 };
 
