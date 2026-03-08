@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor P as Players
+    participant S as System
+
+    Note over S: Registration Phase
+    S->>P: Request Player Names
+    S->>S: ValidateNames()
+
+    Note over S: Setup Phase
+    S->>S: InitializeBoard()
+    S->>S: ShuffleBag()
+    S->>S: SelectStartingPlayer()
+
+    Note over S: Game Phase
+    loop Until GameState == FINISHED
+        S->>S: TurnSequence()
+        S->>S: CheckWinConditions()
+        alt Win condition met
+            S->>S: setGameState(FINISHED)
+        else Win condition not met
+            S->>S: SwitchActivePlayer()
+        end
+    end
+    S->>P: DisplayWinner()

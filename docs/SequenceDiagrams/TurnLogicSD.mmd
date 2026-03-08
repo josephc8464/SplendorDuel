@@ -1,0 +1,46 @@
+sequenceDiagram
+    actor Player
+    participant System
+    participant Board
+
+    Note over System: Start of Turn
+
+    loop Optional Action Phase
+        System-->>Player: showOptionalActions()
+        opt Player chooses Action
+            Player->>System: performOptionalAction()
+        end
+    end
+
+    Note over System: Mandatory Action Phase
+    
+    # Check if a move is even possible
+    System->>Board: getAvailableMovesCount()
+    
+    alt Moves == 0
+        System->>Board: checkBagCount()
+        alt Bag > 0
+            Note right of System: Safety Valve Triggered
+            System->>Player: notifyForcedRefill()
+            System->>Board: refillGrid()
+            System->>System: grantPrivilegeToOpponent()
+            # No 'else' here, we proceed to requestAction below
+        else Bag == 0
+            System->>Player: notifyTurnSkipped("Board & Bag Empty")
+            # This would jump to the end of the turn
+        end
+    end
+
+    # This part now runs regardless of whether a refill just happened
+    System->>Player: requestMandatoryAction()
+    Player->>System: performAction(Take/Buy/Reserve)
+    System->>Board: updateState()
+
+    Note over System: Post-Action Phase
+    System->>System: checkWinConditions()
+    
+    alt isWinner == true 
+        System-->>Player: notifyPlayerWin()
+    else isWinner == false
+        System->>Player: endTurn()
+    end
