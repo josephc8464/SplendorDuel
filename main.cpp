@@ -3,7 +3,9 @@
 
 using std::cout, std::endl;
 
-void main() {
+int main() {
     Game game;
     
+	cout << "Welcome To The Game!" << endl;
+    return 0;
 }

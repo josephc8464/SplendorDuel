@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SplendorDuel", "SplendorDuel.vcxproj", "{822F4FBF-00A7-9218-4891-CBC5EE449C61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Debug|x64.ActiveCfg = Debug|x64
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Debug|x64.Build.0 = Debug|x64
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Debug|x86.ActiveCfg = Debug|Win32
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Debug|x86.Build.0 = Debug|Win32
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Release|x64.ActiveCfg = Release|x64
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Release|x64.Build.0 = Release|x64
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Release|x86.ActiveCfg = Release|Win32
+		{822F4FBF-00A7-9218-4891-CBC5EE449C61}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B57B5474-42BE-42F6-8316-A01AB93FC4F4}
+	EndGlobalSection
+EndGlobal

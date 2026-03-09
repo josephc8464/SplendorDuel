@@ -31,7 +31,7 @@ class Board {
 		std::vector<Card> visibleTier3;
 
         std::vector<Card> royals;
-        std:vector<ColorEnum> bagOfTokens;
+        std::vector<ColorEnum> bagOfTokens;
         int boardPriveleges;
 };
 
