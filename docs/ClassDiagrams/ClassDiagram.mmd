@@ -1,38 +1,66 @@
 classDiagram
-    class Game {
-        -players : Player[2]
-        -board : Board
-        -currentPlayerIndex : int
-        -winningPlayer : int
-        +startNewGame()
-        +processTurn()
-        +checkWinConditions() : bool
-        +transferToken(from, to, pos)
-    }
-    class Player {
-        -boughtCards : vector~Card~
-        -reservedCards : vector~Card~
-        -tokens : int[6]
-        -privileges : int
-        -totalPoints : int
-        -crowns : int
-        +canAfford(Card) : bool
-        +addPrivilege() : bool
-    }
-    class Board {
-        -grid : Token*[5][5]
-        -tier1 : deck~Card~
-        -tier2 : deck~Card~
-        -tier3 : deck~Card~
-        -royals : vector~Card~
-        -privileges : int
-        +refillGrid()
-        +isValidPick(pos1, pos2, pos3) : bool
-    }
-    class Card {
-        +color : ColorEnum
-        +points : int
-        +crowns : int
-        +cost : int[6]
-        +ability : AbilityEnum
-    }
+
+class Game {
+    -Board board
+    -Player players[2]
+    -int currentPlayer
+    +startGame()
+    +takeTurn()
+    +checkWinCondition() bool
+}
+
+class Board {
+    -ColorEnum tokens[5][5]
+    -Deck tier1
+    -Deck tier2
+    -Deck tier3
+    -vector~Card~ visibleTier1
+    -vector~Card~ visibleTier2
+    -vector~Card~ visibleTier3
+    -vector~int~ bagOfTokens
+    -int boardPrivileges
+    +takeTokens(vector~Position~) vector~ColorEnum~
+    +refillCards()
+}
+
+class Player {
+    -array~int~ tokens
+    -array~int~ bonuses
+    -vector~Card~ purchasedCards
+    -vector~Card~ reservedCards
+    -int privileges
+    +canAfford(Card) bool
+    +buyCard(Card)
+    +reserveCard(Card)
+}
+
+class Deck {
+    -stack~Card~ cards
+    +draw() Card
+    +shuffle()
+}
+
+class Card {
+    +int id
+    +ColorEnum bonusColor
+    +Cost cost
+    +int points
+    +int crowns
+    +AbilityEnum ability
+}
+
+class Cost {
+    -array~int~ cost
+}
+
+class Position {
+    +int x
+    +int y
+}
+
+Game --> Board
+Game --> Player
+Board --> Deck
+Board --> Card
+Player --> Card
+Card --> Cost

@@ -21,18 +21,25 @@
 */
 class Board {
     public:
+        class Positon {int x, int y};
+
 		int getToken(int row, int col) const { return *Token[row][col]; };
 		int setToken(int row, int col, int value) { *Token[row][col] = value; };
+        
         std::deque<Card> getTier1Cards() const{ return tier1Cards; };
-         void setTier1Cards(const std::deque<Card>& cards){ tier1Cards = cards; };
-         std::deque<Card> getTier2Cards() const{ return tier2Cards; };
-         void setTier2Cards(const std::deque<Card>& cards){ tier2Cards = cards; };
-         std::deque<Card> getTier3Cards() const{ return tier3Cards; };
-         void setTier3Cards(const std::deque<Card>& cards){ tier3Cards = cards; };
-         std::vector<Card> getRoyals() const{ return royals; };
-         void setRoyals(const std::vector<Card>& cards){ royals = cards; };
-         int getPriveleges() const{ return priveleges; };
-		 void setPriveleges(int priveleges) { this->priveleges = priveleges; };
+        void setTier1Cards(const std::deque<Card>& cards){ tier1Cards = cards; };
+        
+        std::deque<Card> getTier2Cards() const{ return tier2Cards; };
+        void setTier2Cards(const std::deque<Card>& cards){ tier2Cards = cards; };
+        
+        std::deque<Card> getTier3Cards() const{ return tier3Cards; };
+        void setTier3Cards(const std::deque<Card>& cards){ tier3Cards = cards; };
+        
+        std::vector<Card> getRoyals() const{ return royals; };
+        void setRoyals(const std::vector<Card>& cards){ royals = cards; };
+        
+        int getPriveleges() const{ return priveleges; };
+		void setPriveleges(int priveleges) { this->priveleges = priveleges; };
     
     private:
         int* Token[5][5]; 
@@ -40,6 +47,7 @@ class Board {
         std::deque<Card> tier2Cards;
         std::deque<Card> tier3Cards;
         std::vector<Card> royals;
+        std:vector<int> bag;
         int priveleges;
 };
 
