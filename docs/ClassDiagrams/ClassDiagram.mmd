@@ -17,7 +17,8 @@ class Board {
     -vector~Card~ visibleTier1
     -vector~Card~ visibleTier2
     -vector~Card~ visibleTier3
-    -vector~int~ bagOfTokens
+    -vector~Card~ royals
+    -vector~ColorEnum~ bagOfTokens
     -int boardPrivileges
     +takeTokens(vector~Position~) vector~ColorEnum~
     +refillCards()

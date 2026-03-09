@@ -8,7 +8,7 @@ class Deck {
 	public:
 		Deck();
 		void shuffle();
-		Card drawCard();
+		Card drawCard( return cards.pop()); 
 
 	private:
 		std::stack<Card> cards;
