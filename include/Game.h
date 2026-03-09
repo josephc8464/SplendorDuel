@@ -33,7 +33,6 @@ class Game {
         Player players[2];
         Board board;
         int currentPlayerIndex;
-        int winningPlayerIndex = -1;
 
 };
 
