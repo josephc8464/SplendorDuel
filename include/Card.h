@@ -1,6 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include "Cost.h"
 #include <string>
 /*
 * @brief Holds the information of a card, including its gem color, points, cost, crowns, and ability.
@@ -19,11 +20,11 @@
 
 class Card {
     public:
-        enum class GemColor { Red, Green, Blue, White, Black}; 
-		int gemAddition; //The number of permanent gems the player aquires when they purchase the card
+        int id;
+		enum class bonusColor{ Red, Green, Blue, White, Black, RedTwo, BlueTwo, GreenTwo, WhiteTwo, BlackTwo, None };
         int points;
-		int cost[6]; //Each token has an index in the cost array, which corresponds to the 5 gems and pearl
-        int crowns
+		Cost cost; 
+        int crowns;
         enum class ability {None, StealAToken, GetPrivelege, TakeAToken, TakeAnotherTurn, BonusJewel};
 };
 

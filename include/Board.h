@@ -15,7 +15,7 @@
 */
 class Board {
     public:
-        class Positon {int x, int y};
+        class Positon { int x; int y; };
 
 		
     private:

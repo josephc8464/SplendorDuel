@@ -7,13 +7,13 @@
 class Cost{
 	public:
 		Cost();
-		Cost(std::array<int> cost);
+		Cost(std::array<int, 6> cost);
 
-		std::array<int> getCost() const { return cost; };
-		std::array<int> setCost(array<int> newCost) { cost = newCost; };
+		std::array<int, 7> getCost() const { return cost; };
+		std::array<int, 7> setCost(std::array<int, 7> newCost) { cost = newCost; };
 
 	private:
-		std::array<int> cost;
+		std::array<int, 7> cost;
 };
 
 #endif

@@ -35,16 +35,16 @@ class Player {
         std::vector<Card> getBoughtCards() const{ return boughtCards; };
         void addBoughtCard(const Card& card){ boughtCards.push_back(card); };
 
-        array<int> addTokens();
-        array<int> getTokens() { return tokens; };
+        std::array<int, 7> addTokens();
+        std::array<int, 7> getTokens() { return tokens; };
 
-        array<int> addBonus();
-		array<int> getBonus() { return bonus; };
+        std::array<int, 7> addBonus();
+		std::array<int, 7> getBonus() { return bonus; };
 
     private:
         std::string name;
-        std::array<int> tokens;
-        std::array<int> bonus;
+        std::array<int, 7> tokens;
+        std::array<int, 7> bonus;
         int totalPoints;
         int crowns;
         int priveleges;
