@@ -2,10 +2,13 @@ classDiagram
 
 class Game {
     -Board board
-    -Player players[2]
+    -array~Player~ players
     -int currentPlayer
+    +resetGame()
     +startGame()
     +takeTurn()
+    +performAction()
+    +performOptionalAction()
     +checkWinCondition() bool
 }
 
@@ -21,7 +24,12 @@ class Board {
     -vector~ColorEnum~ bagOfTokens
     -int boardPrivileges
     +takeTokens(vector~Position~) vector~ColorEnum~
-    +refillCards()
+    +refillGrid()
+    +takeVisibleTierCard(string tier, int position)
+    +takeDeckTierCard(string tier)
+    +takeRoyalCard(int position);
+    +takePrivilege();
+    +resetBoard()
 }
 
 class Player {
@@ -38,7 +46,7 @@ class Player {
 }
 
 class Deck {
-    -stack~Card~ cards
+    -vector~Card~ cards
     +draw() Card
     +shuffle()
 }
@@ -46,14 +54,10 @@ class Deck {
 class Card {
     +int id
     +ColorEnum bonusColor
-    +Cost cost
+    +array~int~ cost
     +int points
     +int crowns
     +AbilityEnum ability
-}
-
-class Cost {
-    -array~int~ cost
 }
 
 class Position {
@@ -66,4 +70,3 @@ Game --> Player
 Board --> Deck
 Board --> Card
 Player --> Card
-Card --> Cost
