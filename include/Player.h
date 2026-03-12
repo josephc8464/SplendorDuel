@@ -8,14 +8,14 @@
 #include "Card.h"
 
 /*
-*@brief The player class holds all the data on the player. Names, tokens, points, crowns, priveleges, and cards
+*@brief The player class holds all the data on the player. Names, tokens, points, crowns, priveleges, and cards.
 * 
 * Tokens are an array of 7 integers , representing the number of each type of token the player has.    
 * The first 5 are the normal colors in this order: Red, Green, Blue, White, Black. The last two are pearls and gold, index 5 = pearls, index 6 = gold.
 * 
 * Bonus is an array of 7 integers, representing the number of each type of bonus the player has.
 * 
-* The bonsuses are determined at the instance a card is purchased. For example when a card is added to the bought card vector,
+* The bonuses are determined at the instance a card is purchased. For example when a card is added to the bought card vector,
 * the card's attribute describing bonus gem colors is read and updated in the bonus array. This way there is no need to iterate through
 * the purchased card vector everytime for bonus calculations.
 * 
@@ -53,12 +53,12 @@ class Player {
         void removeReservedCard(int index) { reservedCards.erase(reservedCards.begin() + index); };
         
         std::vector<Card> getBoughtCards() const{ return boughtCards; };
-        void addBoughtCard(const Card& card){ boughtCards.push_back(card); }; //TODO: needs to be updated to match card bonus updates
+        void addBoughtCard(const Card& card); 
 
-        std::array<int, 7> addTokens();
+        void addTokens(std::array<int, 7> newTokens);
         std::array<int, 7> getTokens() { return tokens; };
 
-        std::array<int, 7> addBonus();
+        void addBonus(std::array<int, 7> newBonus);
 		std::array<int, 7> getBonus() { return bonus; };
 
     private:
