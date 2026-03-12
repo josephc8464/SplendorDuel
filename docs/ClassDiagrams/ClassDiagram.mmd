@@ -25,9 +25,9 @@ class Board {
     -int boardPrivileges
     +takeTokens(vector~Position~) vector~ColorEnum~
     +refillGrid()
-    +takeVisibleTierCard(string tier, int position)
-    +takeDeckTierCard(string tier)
-    +takeRoyalCard(int position)
+    +takeVisibleTierCard(string tier, int position) Card
+    +takeDeckTierCard(string tier) Card
+    +takeRoyalCard(int position) Card
     +takePrivilege()
     +resetBoard()
 }
