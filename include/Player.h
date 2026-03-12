@@ -25,7 +25,7 @@
 class Player {
     public:
         //Constructor
-        Player::Player() {};
+        Player::Player(std::string playerName) : name(playerName) {};
 
         bool canAfford(Card c);
         void buyCard(Card c);
@@ -40,14 +40,15 @@ class Player {
 		void addPoints(int newPoints) { totalPoints += newPoints; };
 
         int getCrowns() const { return crowns; };
-        void setCrowns(int crowns) { crowns = crowns; };
+        void setCrowns(int crowns) { this->crowns = crowns; };
         void addCrowns(int newCrowns) { crowns += newCrowns; };
 
         int getPrivileges() const { return privileges; };
-        void setPrivileges(int privileges) { privileges = privileges; };
-        void addPrivileges(int newPrivileges) {privileges += newPrivileges};
+        void setPrivileges(int privileges) { this->privileges = privileges; };
+        void addPrivileges(int newPrivileges) { privileges += newPrivileges;  };
 		void removePrivileges(int numPrivileges) { privileges -= numPrivileges; };
 
+        int getNumOfReservedCards() { return reservedCards.size(); };
         Card getReservedCard(int index) const{ return reservedCards.at(index); };
         void setReservedCard(const Card& card){ reservedCards.push_back(card); };
         void removeReservedCard(int index) { reservedCards.erase(reservedCards.begin() + index); };
@@ -56,6 +57,7 @@ class Player {
         void addBoughtCard(const Card& card); 
 
         void addTokens(std::array<int, 7> newTokens);
+        void removeTokens(std::array<int, 7> cost);
         std::array<int, 7> getTokens() { return tokens; };
 
         void addBonus(std::array<int, 7> newBonus);
@@ -63,11 +65,11 @@ class Player {
 
     private:
         std::string name;
-        std::array<int, 7> tokens;
-        std::array<int, 7> bonus;
-        int totalPoints;
-        int crowns;
-        int privileges;
+        std::array<int, 7> tokens = {0,0,0,0,0,0,0};
+        std::array<int, 7> bonus = {0,0,0,0,0,0,0};
+        int totalPoints = 0;
+        int crowns = 0;
+        int privileges= 0;
 
         std::vector<Card> reservedCards;
         std::vector<Card> boughtCards;
