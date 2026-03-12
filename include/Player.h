@@ -10,30 +10,50 @@
 /*
 *@brief The player class holds all the data on the player. Names, tokens, points, crowns, priveleges, and cards
 * 
+* Tokens are an array of 7 integers , representing the number of each type of token the player has.    
+* The first 5 are the normal colors in this order: Red, Green, Blue, White, Black. The last two are pearls and gold, index 5 = pearls, index 6 = gold.
+* 
+* Bonus is an array of 7 integers, representing the number of each type of bonus the player has.
+* 
+* The bonsuses are determined at the instance a card is purchased. For example when a card is added to the bought card vector,
+* the card's attribute describing bonus gem colors is read and updated in the bonus array. This way there is no need to iterate through
+* the purchased card vector everytime for bonus calculations.
+* 
 * @author Joseph Corella
 * @date 2026-03-08
 */
 class Player {
     public:
+        //Constructor
+        Player::Player() {};
+
+        bool canAfford(Card c);
+        void buyCard(Card c);
+        void reserveCard(Card c);
+
         //getters and setters
-        std::string getName() const{ return name; };
-        void setName(const std::string& name);
+        std::string getName() const { return name; };
+        void setName(const std::string& name) { this->name = name; };
 
-        int getTotalPoints() const{ return totalPoints; };
-        void setTotalPoints(int points){ totalPoints = points; };
+        int getTotalPoints() const { return totalPoints; };
+        void setTotalPoints(int points) { totalPoints = points; };
+		void addPoints(int newPoints) { totalPoints += newPoints; };
 
-        int getCrowns() const{ return crowns; };
-        void setCrowns(int crowns){ crowns = crowns; };
+        int getCrowns() const { return crowns; };
+        void setCrowns(int crowns) { crowns = crowns; };
+        void addCrowns(int newCrowns) { crowns += newCrowns; };
 
-        int getPriveleges() const{ return priveleges; };
-        void setPriveleges(int priveleges){ priveleges = priveleges; };
+        int getPrivileges() const { return privileges; };
+        void setPrivileges(int privileges) { privileges = privileges; };
+        void addPrivileges(int newPrivileges) {privileges += newPrivileges};
+		void removePrivileges(int numPrivileges) { privileges -= numPrivileges; };
 
         Card getReservedCard(int index) const{ return reservedCards.at(index); };
         void setReservedCard(const Card& card){ reservedCards.push_back(card); };
         void removeReservedCard(int index) { reservedCards.erase(reservedCards.begin() + index); };
         
         std::vector<Card> getBoughtCards() const{ return boughtCards; };
-        void addBoughtCard(const Card& card){ boughtCards.push_back(card); };
+        void addBoughtCard(const Card& card){ boughtCards.push_back(card); }; //TODO: needs to be updated to match card bonus updates
 
         std::array<int, 7> addTokens();
         std::array<int, 7> getTokens() { return tokens; };
@@ -47,7 +67,7 @@ class Player {
         std::array<int, 7> bonus;
         int totalPoints;
         int crowns;
-        int priveleges;
+        int privileges;
 
         std::vector<Card> reservedCards;
         std::vector<Card> boughtCards;
