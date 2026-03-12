@@ -25,6 +25,7 @@ class Deck {
 		Deck();
 		void shuffle();
 		Card drawCard();
+		void reset();
 
 	private:
 		std::vector<Card> cards;

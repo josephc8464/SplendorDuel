@@ -21,61 +21,56 @@
 * @author Joseph Corella
 * @date 2026-03-08
 */
-enum class ColorEnum { Red, Green, Blue, White, Black, Pearl, Gold };
+enum class ColorEnum { Empty, Red, Green, Blue, White, Black, Pearl, Gold };
 
 class Board {
     public:
-        class Position { int x; int y; };
+        class Position { public: int x; int y; };
         
+        Board() {}; //No Args Constructor
+
         void refillGrid();
-        std::vector<ColorEnum> takeTokens(std::vector<Position> gridPositions);
-        Card takeVisibleTierCard(std::string tier, int position);
-        Card takeDeckTierCard(std::string tier, int position);
-        Card takeRoyalCard(int position);
-		void takePrivilege();
         void resetBoard();
+        std::vector<ColorEnum> takeTokens(std::vector<Position> gridPositions);
 
         //getters, setters
-        Deck getTier1DeckCard();
-		void setTier1DeckCard(Deck deck);
+        Deck getTier1DeckCard() { return tier1Cards; };
+        void setTier1DeckCard(Deck deck) { tier1Cards = deck; };
 
-		Deck getTier2DeckCard();
-		void setTier2DeckCard(Deck deck);
+        Deck getTier2DeckCard() { return tier2Cards; };
+        void setTier2DeckCard(Deck deck) { tier2Cards = deck; };
 
-		Deck getTier3DeckCard();
-        void setTier3DeckCard(Deck deck);
+        Deck getTier3DeckCard() { return tier3Cards; };
+        void setTier3DeckCard(Deck deck) { tier3Cards = deck; };
 
-		std::vector<Card> getVisibleTier1();
-		void setVisibleTier1(std::vector<Card> cards);
+        std::array<Card, 5> getVisibleTier1Cards() { return visibleTier1; };
+        void setVisibleTier1Cards(std::array<Card, 5> tier1) { visibleTier1 = tier1; };
+        
+        std::array<Card, 4> getVisibleTier2Cards() { return visibleTier2; };
+        void setVisibleTier2Cards(std::array<Card, 4> tier2) { visibleTier2 = tier2; };
 
-		std::vector<Card> getVisibleTier2();
-		void setVisibleTier2(std::vector<Card> cards);
+        std::array<Card, 3> getVisibleTier3Cards() { return visibleTier3; };
+        void setVisibleTier3Cards(std::array<Card, 3> tier3) { visibleTier3 = tier3; };
 
-		std::vector<Card> getVisibleTier3();
-        void setVisibleTier3(std::vector<Card> cards);
+        std::vector<ColorEnum> getBagOfTokens() { return bagOfTokens; };
+        void setBagOfTokens(std::vector<ColorEnum> tokens) { bagOfTokens = tokens; };
 
-        std::vector<Card> getRoyals();
-        void setRoyals(std::vector<Card> royals);
+        int getBoardPrivileges() { return boardPrivileges; };
+        void setBoardPrivileges(int privileges) { boardPrivileges = privileges; };
 
-        std::vector<ColorEnum> getBagOfTokens();
-        void setBagOfTokens(std::vector<ColorEnum> tokens);
-
-        int getBoardPrivileges();
-		void setBoardPrivileges(int privileges);
-		
     private:
         ColorEnum tokens[5][5]; 
 		Deck tier1Cards;
 		Deck tier2Cards;
 		Deck tier3Cards;
 
-        std::vector<Card> visibleTier1;
-		std::vector<Card> visibleTier2;
-		std::vector<Card> visibleTier3;
+        std::array<Card, 5> visibleTier1 = { 0,0,0,0,0 };
+        std::array<Card, 4> visibleTier2 = { 0,0,0,0 };
+        std::array<Card, 3> visibleTier3 = { 0,0,0 };
 
-        std::vector<Card> royals;
+        std::array<Card, 4> royals = { 0,0,0,0 };
         std::vector<ColorEnum> bagOfTokens;
-        int boardPrivileges;
+        int boardPrivileges = 3;
 };
 
 #endif // BOARD_H

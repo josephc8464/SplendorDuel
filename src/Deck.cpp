@@ -9,8 +9,12 @@ void Deck::shuffle() {
 }
 
 Card Deck::drawCard() {
-	Card drawnCard = cards.at(0);
-	cards.erase(cards.begin() + 0);
+	Card drawnCard = cards.back();
+	cards.pop_back();
 
 	return drawnCard;
+}
+
+void Deck::reset() {
+	cards.clear();
 }

@@ -22,10 +22,6 @@ bool Player::canAfford(Card c) {
 	return true;
 }
 
-void Player::buyCard(Card c) {
-	
-}
-
 void Player::reserveCard(Card c) {
 	reservedCards.push_back(c);
 }

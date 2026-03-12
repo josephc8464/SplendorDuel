@@ -25,11 +25,12 @@
 class Player {
     public:
         //Constructor
-        Player::Player(std::string playerName) : name(playerName) {};
+        Player() {};
+        Player(std::string playerName) : name(playerName) {};
 
         bool canAfford(Card c);
-        void buyCard(Card c);
         void reserveCard(Card c);
+        void reset();
 
         //getters and setters
         std::string getName() const { return name; };

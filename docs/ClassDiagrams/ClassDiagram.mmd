@@ -17,18 +17,14 @@ class Board {
     -Deck tier1
     -Deck tier2
     -Deck tier3
-    -vector~Card~ visibleTier1
-    -vector~Card~ visibleTier2
-    -vector~Card~ visibleTier3
-    -vector~Card~ royals
+    -array~Card~ visibleTier1
+    -array~Card~ visibleTier2
+    -array~Card~ visibleTier3
+    ~array~Card~ royals
     -vector~ColorEnum~ bagOfTokens
     -int boardPrivileges
-    +takeTokens(vector~Position~) vector~ColorEnum~
     +refillGrid()
-    +takeVisibleTierCard(string tier, int position) Card
-    +takeDeckTierCard(string tier) Card
-    +takeRoyalCard(int position) Card
-    +takePrivilege()
+    +takeTokens(vector<Position> gridPositions) vector~ColorEnum~
     +resetBoard()
 }
 
@@ -36,24 +32,25 @@ class Player {
     -array~int~ tokens
     -array~int~ bonuses
     -vector~Card~ purchasedCards
-    -vector~Card~ reservedCards
+    -array~Card~ reservedCards
     -int privileges
     -int totalPoints
     -int crowns
     +canAfford(Card) bool
-    +buyCard(Card)
     +reserveCard(Card)
+    +reset()
 }
 
 class Deck {
     -vector~Card~ cards
     +draw() Card
     +shuffle()
+    +reset()
 }
 
 class Card {
     +int id
-    +ColorEnum bonusColor
+    +GemEnum bonusColor
     +array~int~ cost
     +int points
     +int crowns

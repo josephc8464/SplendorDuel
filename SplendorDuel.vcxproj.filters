@@ -38,9 +38,6 @@
     <ClInclude Include="include\Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Cost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>

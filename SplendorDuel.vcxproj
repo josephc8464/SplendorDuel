@@ -128,7 +128,6 @@
   <ItemGroup>
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Card.h" />
-    <ClInclude Include="include\Cost.h" />
     <ClInclude Include="include\Deck.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Player.h" />
