@@ -20,24 +20,21 @@ void Board::refillGrid() {
 
 void Board::resetBoard() {
 
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 5; j++) {
-			tokens[i][j] = ColorEnum::Empty;
-		}
-	}
+	std::fill(&tokens[0][0], &tokens[0][0] + (5 * 5), ColorEnum::Empty);
+
 	tier1Cards.reset();
 	tier2Cards.reset();
 	tier3Cards.reset();
 
-	visibleTier1 = { 0,0,0,0,0 };
-	visibleTier2 = { 0,0,0,0 };
-	visibleTier3 = { 0,0,0 };
+	visibleTier1 = {};
+	visibleTier2 = {};
+	visibleTier3 = {};
 
-	std::array<Card, 4> royals = { 0,0,0,0 };
+	royals = {};
 
-	std::vector<ColorEnum> bagOfTokens;
+	bagOfTokens.clear();
 
-	int boardPrivileges = 3;
+	boardPrivileges = 3;
 }
 
 std::vector<ColorEnum> Board::takeTokens(std::vector<Board::Position> gridPositions) {

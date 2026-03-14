@@ -29,7 +29,6 @@ class Player {
         Player(std::string playerName) : name(playerName) {};
 
         bool canAfford(Card c);
-        void reserveCard(Card c);
         void reset();
 
         //getters and setters
@@ -38,30 +37,24 @@ class Player {
 
         int getTotalPoints() const { return totalPoints; };
         void setTotalPoints(int points) { totalPoints = points; };
-		void addPoints(int newPoints) { totalPoints += newPoints; };
 
         int getCrowns() const { return crowns; };
         void setCrowns(int crowns) { this->crowns = crowns; };
-        void addCrowns(int newCrowns) { crowns += newCrowns; };
 
         int getPrivileges() const { return privileges; };
         void setPrivileges(int privileges) { this->privileges = privileges; };
-        void addPrivileges(int newPrivileges) { privileges += newPrivileges;  };
-		void removePrivileges(int numPrivileges) { privileges -= numPrivileges; };
 
-        int getNumOfReservedCards() { return reservedCards.size(); };
-        Card getReservedCard(int index) const{ return reservedCards.at(index); };
-        void setReservedCard(const Card& card){ reservedCards.push_back(card); };
-        void removeReservedCard(int index) { reservedCards.erase(reservedCards.begin() + index); };
+        std::vector<Card> getReservedCards() { return reservedCards; };
+        void setReservedCards(std::vector<Card> newReservedCards) { reservedCards = newReservedCards; };
         
         std::vector<Card> getBoughtCards() const{ return boughtCards; };
-        void addBoughtCard(const Card& card); 
+        void setBoughtCards(std::vector<Card> newBoughtCards) { boughtCards = newBoughtCards; };
+        void addBoughtCard(Card c) { boughtCards.push_back(c); };
 
-        void addTokens(std::array<int, 7> newTokens);
-        void removeTokens(std::array<int, 7> cost);
+        void setTokens(std::array<int, 7> newTokens) { tokens = newTokens; };
         std::array<int, 7> getTokens() { return tokens; };
 
-        void addBonus(std::array<int, 7> newBonus);
+        void setBonus(std::array<int, 7> newBonus) { bonus = newBonus; };
 		std::array<int, 7> getBonus() { return bonus; };
 
     private:

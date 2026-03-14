@@ -22,7 +22,8 @@
 
 class Deck {
 	public:
-		Deck();
+		Deck() {};
+		Deck(std::vector<Card> chosenDeck) { cards = chosenDeck; };
 		void shuffle();
 		Card drawCard();
 		void reset();

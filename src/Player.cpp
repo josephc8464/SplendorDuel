@@ -1,9 +1,14 @@
 #include "../include/Player.h"
 
-void Player::addBoughtCard(const Card & card) {
-	boughtCards.push_back(card);
-}
-
+/*
+* @brief determines if the player can buy a card. Does not recognize which tokens will be used.
+* 
+* This function ONLY determines if a card can be bought by a player! NOT the token combinations to buy a card, that
+* should be determined by the player.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
 bool Player::canAfford(Card c) {
 
 	int deficit = 0; //Keeps count of deficits in tokens
@@ -22,29 +27,20 @@ bool Player::canAfford(Card c) {
 	return true;
 }
 
-void Player::reserveCard(Card c) {
-	reservedCards.push_back(c);
+/*
+* @brief resets the player class. All variables set to default values.
+* @author Joseph Corella
+* @date 2026-03-14
+*/
+
+void Player::reset() {
+	name.clear();
+	tokens = { 0,0,0,0,0,0,0 };
+	bonus = { 0,0,0,0,0,0,0 };
+	int totalPoints = 0;
+	int crowns = 0;
+	int privileges = 0;
+
+	reservedCards.clear();
+	boughtCards.clear();
 }
-
-void Player::addTokens(std::array<int, 7> newTokens) {
-	for (int i = 0; i < 7; i++)
-	{
-		tokens.at(i) += newTokens.at(i);
-	}
-}
-
-void Player::removeTokens(std::array<int, 7> cost) {
-	for (int i = 0; i < 7; i++)
-	{
-		tokens.at(i) -= cost.at(i);
-	}
-}
-
-void Player::addBonus(std::array<int, 7> newBonus) {
-	for (int i = 0; i < 7; i++)
-	{
-		bonus.at(i) += newBonus.at(i);
-	}
-}
-
-

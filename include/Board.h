@@ -15,7 +15,7 @@
 *  of the game, only the actions taken from the game controller. Thus logic that inhibits players actions should be handled
 *  in the game class. 
 * 
-*  The board class should hold the tier card decks, the visible tier cards, the royal cards, the bag of tokens, and the board priveleges.
+*  The board class should hold the tier card decks, the visible tier cards, the royal cards, the bag of tokens, and the board privileges.
 *  Thus it acts more of a data structure for the game class to interact with, and not a controller of the game itself.
 * 
 * @author Joseph Corella
@@ -59,16 +59,16 @@ class Board {
         void setBoardPrivileges(int privileges) { boardPrivileges = privileges; };
 
     private:
-        ColorEnum tokens[5][5]; 
+        ColorEnum tokens[5][5] = {};
 		Deck tier1Cards;
 		Deck tier2Cards;
 		Deck tier3Cards;
 
-        std::array<Card, 5> visibleTier1 = { 0,0,0,0,0 };
-        std::array<Card, 4> visibleTier2 = { 0,0,0,0 };
-        std::array<Card, 3> visibleTier3 = { 0,0,0 };
+        std::array<Card, 5> visibleTier1 = {};
+        std::array<Card, 4> visibleTier2 = {};
+        std::array<Card, 3> visibleTier3 = {};
 
-        std::array<Card, 4> royals = { 0,0,0,0 };
+        std::array<Card, 4> royals = {};
         std::vector<ColorEnum> bagOfTokens;
         int boardPrivileges = 3;
 };
