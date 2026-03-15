@@ -15,7 +15,7 @@ bool Player::canAfford(Card c) {
 
 	for(int i=0; i<6; i++) 
 	{
-		deficit = bonus.at(i) + tokens.at(i) - c.cost.at(i);
+		deficit = bonus.at(i) + tokens.at(i) - c.getCost().at(i);
 	}
 
 	//If the deficit of tokens is greater than the amount of gold tokens the player owns, the player cannot afford it.
