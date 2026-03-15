@@ -25,6 +25,9 @@ enum class ColorEnum { Empty, Red, Green, Blue, White, Black, Pearl, Gold };
 
 class Board {
     public:
+
+        friend void testBoardVariables();
+
         class Position { public: int x; int y; };
         
         Board() {}; //No Args Constructor
