@@ -133,6 +133,11 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Player.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier1.png" />
+    <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier2.png" />
+    <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier3.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

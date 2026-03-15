@@ -8,7 +8,7 @@ int main() {
     
 	cout << "Welcome To The Game!" << endl;
 
-    
+    game.startGame();
 
     return 0;
 }

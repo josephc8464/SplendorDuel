@@ -1,5 +1,7 @@
 #include "../include/Game.h"
 
+using std::cout, std::endl, std::cin;
+
 /*
 * @brief Checks if a player has satisfied one of three win conditions.
 * 
@@ -35,15 +37,15 @@ bool Game::checkWinCondition(int pIndx) {
 		int totalColorSum = 0;
 		Card prevCard = boughtCards.at(0);
 
-		totalColorSum += prevCard.points;
+		totalColorSum += prevCard.getPoints();
 
 		for (int i = 1; i < boughtCards.size(); i++)
 		{
 			Card currCard = boughtCards.at(i);
 
 			//Adds to total sum if cards have the same color.
-			if (currCard.color == prevCard.color) {
-				totalColorSum += currCard.points;
+			if (currCard.getColor() == prevCard.getColor()) {
+				totalColorSum += currCard.getPoints();
 
 				if (totalColorSum >= 20) {
 					return true;
@@ -52,7 +54,7 @@ bool Game::checkWinCondition(int pIndx) {
 
 			//Otherwise start a new sum
 			else {
-				totalColorSum = currCard.points;
+				totalColorSum = currCard.getPoints();
 			}
 
 			
@@ -71,7 +73,47 @@ void Game::performOptionalAction(int pIndx) {
 
 }
 
-void Game::startGame() {}
+/*
+* @brief initializes the game. Sets up the board, adds player names, chooses first player to start.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
+void Game::startGame() {
+	std::string name1, name2;
 
-void Game::takeTurn() {}
+	cout << "Starting Game..." << endl;
+
+	
+	cout << "Player 1 name: " << endl;
+	cin >> name1;
+	
+	cout << "Player 2 name: " << endl;
+	cin >> name2;
+	
+	players.at(0).setName(name1);
+	players.at(1).setName(name2);
+
+
+	std::cout << R"(
+   _____  _____  _      ______ _   _ _____   ____  _____  
+  / ____||  __ \| |    |  ____| \ | |  __ \ / __ \|  __ \ 
+ | (___  | |__) | |    | |__  |  \| | |  | | |  | | |__) |
+  \___ \ |  ___/| |    |  __| | . ` | |  | | |  | |  _  / 
+  ____) || |    | |____| |____| |\  | |__| | |__| | | \ \ 
+ |_____/ |_|    |______|______|_| \_|_____/ \____/|_|  \_\
+                                                          
+   _____  _    _  _____  _      
+  |  __ \| |  | || ____|| |     
+  | |  | | |  | || |__  | |     
+  | |  | | |  | ||  __| | |     
+  | |__| | |__| || |____| |____ 
+  |_____/ \____/ |______||______|
+    )" << std::endl;
+	
+}
+
+void Game::takeTurn() {
+
+}
 
