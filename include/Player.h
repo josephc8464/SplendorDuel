@@ -24,6 +24,9 @@
 */
 class Player {
     public:
+
+        friend void testPlayerVariables(); 
+
         //Constructor
         Player() {};
         Player(std::string playerName) : name(playerName) {};
