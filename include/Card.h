@@ -20,22 +20,60 @@
 * 
 * @author: Joseph Corella
 * @date: 2026-03-08
+* 
+* @note: Updated 2026-03-15 - Refactored for private encapsulation and removed gold costs.
 */
 
+enum class bonusColor { Red, Green, Blue, White, Black, Wild };
+enum class ability { None, StealAToken, GetPrivelege, TakeAToken, TakeAnotherTurn, BonusJewel };
 
 class Card {
     public:
+        // --- Constructors ---
+        Card() {}
+        Card(int newId, std::array<int, 7> newCost, bonusColor newColor,
+            ability newAbility, int newBonus, int newPoints, int newCrowns)
+            : id(newId), cost(newCost), color(newColor),
+            cardAbility(newAbility), bonusGems(newBonus),
+            points(newPoints), crowns(newCrowns) {
+        }
+
+        // --- Id ---
+        int getId() const { return id; }
+        void setId(int newId) { id = newId; }
+
+        // --- Cost ---
+        std::array<int, 7> getCost() const { return cost; }
+        void setCost(std::array<int, 7> newCost) { cost = newCost; }
+
+        // --- Color & Ability ---
+        bonusColor getColor() const { return color; }
+        void setColor(bonusColor newColor) { color = newColor; }
+        ability getAbility() const { return cardAbility; }
+        void setAbility(ability newAbility) { cardAbility = newAbility; }
+
+        // --- Stats ---
+        int getBonusGems() const { return bonusGems; }
+        void setBonusGems(int newBonus) { bonusGems = newBonus; }
+        int getPoints() const { return points; }
+        void setPoints(int newPoints) { points = newPoints; }
+        int getCrowns() const { return crowns; }
+        void setCrowns(int newCrowns) { crowns = newCrowns; }
+
+        // --- Comparators ---
+        bool operator<(const Card& other) const {
+            if (this->color != other.color) {
+                return static_cast<int>(this->color) < static_cast<int>(other.color);
+            }
+            return this->points < other.points;
+        }
+
+    private:
         int id = 0;
-
-        std::array<int, 7> cost = {}; // 0: Red, 1: Green, 2: Blue, 3: White, 4: Black, 5: Pearl, 6: Gold
-
-        enum class bonusColor { Red, Green, Blue, White, Black, Wild};
-        enum class ability { None, StealAToken, GetPrivelege, TakeAToken, TakeAnotherTurn, BonusJewel };
-    
+        std::array<int, 7> cost = {};
         bonusColor color = bonusColor::Wild;
         ability cardAbility = ability::None;
-
-        int bonusGems = 0; //The amount of bonus gems the card provides.
+        int bonusGems = 0;
         int points = 0;
         int crowns = 0;
 };
