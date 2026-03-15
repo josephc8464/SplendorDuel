@@ -27,10 +27,10 @@
 class Game {
     public:
         //Constructor
-        Game() : currentPlayerIndex(2) {}
+        Game() : currPIndx(2) {}
 
-        Player& getCurrentPlayer() { return players[currentPlayerIndex]; }
-        void nextTurn() { currentPlayerIndex = (currentPlayerIndex + 1) % 2; }
+        Player& getCurrentPlayer() { return players[currPIndx]; }
+        void nextTurn() { currPIndx = (currPIndx + 1) % 2; }
 
         void startGame();
         void takeTurn();
@@ -38,10 +38,19 @@ class Game {
 		void performAction(int pIndx);
         void performOptionalAction(int pIndx);
     
+        std::array<Player, 2> getPlayers() { return players; };
+        void setPlayers(std::array<Player, 2> newPlayers) { players = newPlayers; };
+
+        Board getBoard() { return board; };
+        void setBoard(Board newBoard) { board = newBoard; };
+
+        int getCurrPIndx() { return currPIndx; }; //Get Current Player Index
+        void setCurrPIndx(int indx) { currPIndx = indx; }; //Set Current Player Index
+        
     private:
         std::array<Player, 2> players;
         Board board;
-        int currentPlayerIndex = 0;
+        int currPIndx = 0; //Current Player Index
 
 };
 
