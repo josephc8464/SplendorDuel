@@ -1,6 +1,8 @@
 #include "../include/Board.h"
 #include <random>
 #include <iostream>
+#include <algorithm>
+#include <iomanip>
 
 /*
 * @brief prints out all the variables of the board in terminal. For development and testing.
@@ -8,13 +10,14 @@
 * @author Joseph Corella
 * @date 2026-03-14
 */
-void Board::printBoard() {
+void Board::printBoard() const {
 	
-	for (int i = 0; i < 4; i++) {
-		for(int j=0; j<4; j++) {
-			std::cout << "[ " << colorToString(tokens[i][j]) << "] ";
+	for (int i = 0; i < 5; i++) {
+		std::cout << "-------------------------------------------------" << std::endl;
+		for(int j=0; j<5; j++) {
+			std::cout << "[ " << std::setw(5) << std::left << colorToString(tokens[i][j]) << " ] ";
 		}
-		std::cout << std::endl;
+		std::cout << std::endl << "-------------------------------------------------" << std::endl;
 	}
 }
 
@@ -28,7 +31,9 @@ void Board::refillGrid() {
 	static const int SPIRAL_X[] = { 2, 2, 3, 3, 3, 2, 1, 1, 1, 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, 0 };
 	static const int SPIRAL_Y[] = { 2, 3, 3, 2, 1, 1, 1, 2, 3, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 3, 4 };
 
-	std::shuffle(bagOfTokens.begin(), bagOfTokens.end(), std::default_random_engine());
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(bagOfTokens.begin(), bagOfTokens.end(), g);
 
 	for(int i=0; i<25; i++) {
 		int x = SPIRAL_X[i];
