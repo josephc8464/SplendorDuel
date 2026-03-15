@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <vector>
+#include <array>
 #include <string>
 #include <memory>
 
@@ -26,54 +27,55 @@ enum class ColorEnum { Empty, Red, Green, Blue, White, Black, Pearl, Gold };
 class Board {
     public:
 
-        friend void testBoardVariables();
+        //friend void testBoardVariables();
 
         class Position { public: int x; int y; };
         
         Board() {}; //No Args Constructor
 
         //printing functions for testing
-        void printBoard();
+        void printBoard() const;
 
         void refillGrid();
         void resetBoard();
         std::vector<ColorEnum> takeTokens(std::vector<Position> gridPositions);
 
-        std::string colorToString(ColorEnum color) {
+        std::string colorToString(ColorEnum color) const {
             switch (color) {
             case ColorEnum::Red:   return "Red";
             case ColorEnum::Green: return "Green";
             case ColorEnum::Blue:  return "Blue";
             case ColorEnum::White: return "White";
             case ColorEnum::Black: return "Black";
+            case ColorEnum::Gold:  return "Gold";
+            case ColorEnum::Pearl: return "Pearl";
             default:               return "Empty";
             }
         }
 
         //getters, setters
-        Deck getTier1DeckCard() { return tier1Cards; };
-        void setTier1DeckCard(Deck deck) { tier1Cards = deck; };
 
-        Deck getTier2DeckCard() { return tier2Cards; };
-        void setTier2DeckCard(Deck deck) { tier2Cards = deck; };
+        // --- Tier Decks ---
+        Deck getTier1DeckCard() const { return tier1Cards; }
+        void setTier1DeckCard(Deck deck) { tier1Cards = deck; }
+        Deck getTier2DeckCard() const { return tier2Cards; }
+        void setTier2DeckCard(Deck deck) { tier2Cards = deck; }
+        Deck getTier3DeckCard() const { return tier3Cards; }
+        void setTier3DeckCard(Deck deck) { tier3Cards = deck; }
 
-        Deck getTier3DeckCard() { return tier3Cards; };
-        void setTier3DeckCard(Deck deck) { tier3Cards = deck; };
+        // --- Visible Cards ---
+        std::array<Card, 5> getVisibleTier1Cards() const { return visibleTier1; }
+        void setVisibleTier1Cards(std::array<Card, 5> tier1) { visibleTier1 = tier1; }
+        std::array<Card, 4> getVisibleTier2Cards() const { return visibleTier2; }
+        void setVisibleTier2Cards(std::array<Card, 4> tier2) { visibleTier2 = tier2; }
+        std::array<Card, 3> getVisibleTier3Cards() const { return visibleTier3; }
+        void setVisibleTier3Cards(std::array<Card, 3> tier3) { visibleTier3 = tier3; }
 
-        std::array<Card, 5> getVisibleTier1Cards() { return visibleTier1; };
-        void setVisibleTier1Cards(std::array<Card, 5> tier1) { visibleTier1 = tier1; };
-        
-        std::array<Card, 4> getVisibleTier2Cards() { return visibleTier2; };
-        void setVisibleTier2Cards(std::array<Card, 4> tier2) { visibleTier2 = tier2; };
-
-        std::array<Card, 3> getVisibleTier3Cards() { return visibleTier3; };
-        void setVisibleTier3Cards(std::array<Card, 3> tier3) { visibleTier3 = tier3; };
-
-        std::vector<ColorEnum> getBagOfTokens() { return bagOfTokens; };
-        void setBagOfTokens(std::vector<ColorEnum> tokens) { bagOfTokens = tokens; };
-
-        int getBoardPrivileges() { return boardPrivileges; };
-        void setBoardPrivileges(int privileges) { boardPrivileges = privileges; };
+        // --- Bag & Privileges ---
+        std::vector<ColorEnum> getBagOfTokens() const { return bagOfTokens; }
+        void setBagOfTokens(std::vector<ColorEnum> tokens) { bagOfTokens = tokens; }
+        int getBoardPrivileges() const { return boardPrivileges; }
+        void setBoardPrivileges(int privileges) { boardPrivileges = privileges; }
 
     private:
         ColorEnum tokens[5][5] = {};

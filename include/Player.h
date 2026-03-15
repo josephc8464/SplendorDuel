@@ -24,41 +24,44 @@
 */
 class Player {
     public:
+         
+        //testing
+        //friend void testPlayerVariables(); 
 
-        friend void testPlayerVariables(); 
-
-        //Constructor
-        Player() {};
-        Player(std::string playerName) : name(playerName) {};
+        // --- Constructors ---
+        Player() {}
+        Player(std::string playerName) : name(playerName) {}
 
         bool canAfford(Card c);
         void reset();
 
-        //getters and setters
-        std::string getName() const { return name; };
-        void setName(const std::string& name) { this->name = name; };
+        // --- Getters & Setters ---
+        std::string getName() const { return name; }
+        void setName(const std::string& name) { this->name = name; }
 
-        int getTotalPoints() const { return totalPoints; };
-        void setTotalPoints(int points) { totalPoints = points; };
+        int getTotalPoints() const { return totalPoints; }
+        void setTotalPoints(int points) { totalPoints = points; }
 
-        int getCrowns() const { return crowns; };
-        void setCrowns(int crowns) { this->crowns = crowns; };
+        int getCrowns() const { return crowns; }
+        void setCrowns(int crowns) { this->crowns = crowns; }
 
-        int getPrivileges() const { return privileges; };
-        void setPrivileges(int privileges) { this->privileges = privileges; };
+        int getPrivileges() const { return privileges; }
+        void setPrivileges(int privileges) { this->privileges = privileges; }
 
-        std::vector<Card> getReservedCards() { return reservedCards; };
-        void setReservedCards(std::vector<Card> newReservedCards) { reservedCards = newReservedCards; };
-        
-        std::vector<Card> getBoughtCards() const{ return boughtCards; };
-        void setBoughtCards(std::vector<Card> newBoughtCards) { boughtCards = newBoughtCards; };
-        void addBoughtCard(Card c) { boughtCards.push_back(c); };
+        // --- Reserved & Bought Cards ---
+        const std::vector<Card> getReservedCards() const { return reservedCards; }
+        void setReservedCards(const std::vector<Card> newReservedCards) { reservedCards = newReservedCards; }
 
-        void setTokens(std::array<int, 7> newTokens) { tokens = newTokens; };
-        std::array<int, 7> getTokens() { return tokens; };
+        const std::vector<Card> getBoughtCards() const { return boughtCards; }
+        void setBoughtCards(const std::vector<Card> newBoughtCards) { boughtCards = newBoughtCards; }
+        void addBoughtCard(Card c) { boughtCards.push_back(c); }
 
-        void setBonus(std::array<int, 7> newBonus) { bonus = newBonus; };
-		std::array<int, 7> getBonus() { return bonus; };
+        // --- Tokens & Bonuses ---
+        const std::array<int, 7> getTokens() const { return tokens; }
+        void setTokens(const std::array<int, 7> newTokens) { tokens = newTokens; }
+
+        const std::array<int, 7> getBonus() const { return bonus; }
+        void setBonus(const std::array<int, 7> newBonus) { bonus = newBonus; }
 
     private:
         std::string name;
