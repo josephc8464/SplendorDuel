@@ -34,14 +34,14 @@ class Game {
 
         void startGame();
         void takeTurn();
-        bool checkWinCondition(Player p);
-		void performAction(Player p);
-        void performOptionalAction(Player p);
+        bool checkWinCondition(int pIndx);
+		void performAction(int pIndx);
+        void performOptionalAction(int pIndx);
     
     private:
         std::array<Player, 2> players;
         Board board;
-        int currentPlayerIndex;
+        int currentPlayerIndex = 0;
 
 };
 

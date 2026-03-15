@@ -1,6 +1,29 @@
 #include "../include/Board.h"
 #include <random>
+#include <iostream>
 
+/*
+* @brief prints out all the variables of the board in terminal. For development and testing.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
+void Board::printBoard() {
+	
+	for (int i = 0; i < 4; i++) {
+		for(int j=0; j<4; j++) {
+			std::cout << "[ " << colorToString(tokens[i][j]) << "] ";
+		}
+		std::cout << std::endl;
+	}
+}
+
+/*
+* @brief Refills the token grid in a spiral pattern. Stops when the bag of tokens is empty.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
 void Board::refillGrid() {
 	static const int SPIRAL_X[] = { 2, 2, 3, 3, 3, 2, 1, 1, 1, 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, 0 };
 	static const int SPIRAL_Y[] = { 2, 3, 3, 2, 1, 1, 1, 2, 3, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 3, 4 };
@@ -18,9 +41,19 @@ void Board::refillGrid() {
 	}
 }
 
+/*
+* @brief resets the board back to a default state. Empties the cards, tokens and bag. Returns privileges to 3.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
 void Board::resetBoard() {
 
-	std::fill(&tokens[0][0], &tokens[0][0] + (5 * 5), ColorEnum::Empty);
+	for (int i = 0; i < 5; i++) {
+		for(int j=0; j<5; j++) {
+			tokens[i][j] = ColorEnum::Empty;
+		}
+	}
 
 	tier1Cards.reset();
 	tier2Cards.reset();
@@ -37,6 +70,12 @@ void Board::resetBoard() {
 	boardPrivileges = 3;
 }
 
+/*
+* @brief Takes up to 3 tokens in sequence. Contains no game logic, is given a vector of positions to take from the tokenGrid array.
+* 
+* @author Joseph Corella
+* @date 2026-03-14
+*/
 std::vector<ColorEnum> Board::takeTokens(std::vector<Board::Position> gridPositions) {
 	
 	std::vector<ColorEnum> tokensTaken;

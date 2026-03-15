@@ -29,9 +29,23 @@ class Board {
         
         Board() {}; //No Args Constructor
 
+        //printing functions for testing
+        void printBoard();
+
         void refillGrid();
         void resetBoard();
         std::vector<ColorEnum> takeTokens(std::vector<Position> gridPositions);
+
+        std::string colorToString(ColorEnum color) {
+            switch (color) {
+            case ColorEnum::Red:   return "Red";
+            case ColorEnum::Green: return "Green";
+            case ColorEnum::Blue:  return "Blue";
+            case ColorEnum::White: return "White";
+            case ColorEnum::Black: return "Black";
+            default:               return "Empty";
+            }
+        }
 
         //getters, setters
         Deck getTier1DeckCard() { return tier1Cards; };
