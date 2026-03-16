@@ -2,6 +2,7 @@
 #include <cctype>
 #include <iostream>
 #include <limits>
+#include <random>
 
 using std::cout, std::endl, std::cin;
 
@@ -113,12 +114,14 @@ void Game::performOptionalAction(int pIndx) {
 /*
 * @brief initializes the game. Sets up the board, adds player names, chooses first player to start.
 * 
+* Creates new instances for the board to copy into its own memory.
+* 
 * @author Joseph Corella
 * @date 2026-03-14
 */
 void Game::startGame() {
 
-	//Set player names
+	// --- SET PLAYER NAMES ---
 	std::string name1, name2;
 
 	/*
@@ -129,10 +132,10 @@ void Game::startGame() {
 	players.at(1).setName(name2);
 	*/
 	
-	//Refill Bag, and disperse tokens onto board
+	// --- Initialize the bag of Tokens and disperse the tokens onto the board ---
 	std::vector<ColorEnum> tempBag;
 
-	for (int i = 0; i < 4; i++) { // Adjusted loop to 4 iterations (4*5 = 20)
+	for (int i = 0; i < 4; i++) {
 		tempBag.push_back(ColorEnum::Red);
 		tempBag.push_back(ColorEnum::Green);
 		tempBag.push_back(ColorEnum::Blue);
@@ -148,8 +151,62 @@ void Game::startGame() {
 	board.setBagOfTokens(tempBag);
 	board.refillGrid();
 	
-	board.getTier1DeckCard().loadFromCSV("deck/royalCards.csv");
+	/*
+	*  --------------------------------- Scan in decks into board class. ------------------------------------------
+	* 
+	* tempDeck is used multiple times to read in data from CSV file.
+	* Since royals cards are an array, the tempDeck is popped four times to move the royal cards into the Royal Array.
+	*/
+	Deck tempDeck;
 
+	tempDeck.loadFromCSV("deck/firstTier.csv");
+	board.setTier1DeckCard(tempDeck);
+	tempDeck.reset();
+
+	tempDeck.loadFromCSV("deck/secondTier.csv");
+	board.setTier2DeckCard(tempDeck);
+	tempDeck.reset();
+
+	tempDeck.loadFromCSV("deck/thirdTier.csv");
+	board.setTier3DeckCard(tempDeck);
+	tempDeck.reset();
+
+	tempDeck.loadFromCSV("deck/royalCards.csv");
+	std::array<Card, 4> newRoyals;
+
+	//Add royals
+	for (int i = 0; i < 4; i++) {
+		newRoyals.at(i) = tempDeck.drawCard();
+	}
+
+	// -- Setup visible tier cards ---
+	// Same idea here, since visible tiers are an array of cards, the deck is drawn upon by the corresponding amount.
+
+	std::array<Card, 5> vTier1 = {};
+	std::array<Card, 4> vTier2 = {};
+	std::array<Card, 3> vTier3 = {};
+
+	for (int i = 0; i < 5; i++) {
+		vTier1.at(i) = board.getTier1DeckCard().drawCard();
+
+		if (i < 4) {
+			vTier2.at(i) = board.getTier2DeckCard().drawCard();
+		}
+		if (i < 3) {
+			vTier3.at(i) = board.getTier3DeckCard().drawCard();
+		}
+	}
+
+	board.setVisibleTier1Cards(vTier1);
+	board.setVisibleTier2Cards(vTier2);
+	board.setVisibleTier3Cards(vTier3);
+
+	int currentPlayer = std::uniform_int_distribution<int>(0, 1)(std::mt19937{ std::random_device{}() });
+
+	currPIndx = currentPlayer;
+	cout << "Current Player: " << currPIndx;
+
+	// ------------------- TITLE DISPLAY ------------------------------
 	std::cout << R"(
    _____  _____  _      ______ _   _ _____   ____  _____  
   / ____||  __ \| |    |  ____| \ | |  __ \ / __ \|  __ \ 
