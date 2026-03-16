@@ -51,7 +51,9 @@ namespace {
 * @date 2026-03-14
 */
 void Deck::shuffle() {
-	std::shuffle(cards.begin(), cards.end(), std::default_random_engine());
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(cards.begin(), cards.end(), g);
 }
 
 /*
@@ -133,8 +135,8 @@ void Deck::loadFromCSV(std::string fileName) {
         }
 
         c.setCost(newTokens);
-
-        c.printCard();
+        
+        cards.push_back(c);
     }
 
     file.close();
