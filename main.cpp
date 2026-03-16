@@ -1,5 +1,6 @@
 #include <iostream>
 #include "include/Game.h"
+#include "include/Card.h"
 
 using std::cout, std::endl;
 

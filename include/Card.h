@@ -1,4 +1,4 @@
-#ifndef CARD_H
+﻿#ifndef CARD_H
 #define CARD_H
 
 #include <string>
@@ -24,41 +24,45 @@
 * @note: Updated 2026-03-15 - Refactored for private encapsulation and removed gold costs.
 */
 
-enum class bonusColor { Red, Green, Blue, White, Black, Wild };
-enum class ability { None, StealAToken, GetPrivelege, TakeAToken, TakeAnotherTurn, BonusJewel };
+enum class bonusColor { Red, Green, Blue, White, Black, Wild, None };
+enum class ability { None, StealAToken, GetPrivilege, TakeAToken, TakeAnotherTurn, BonusJewel, BonusJewelTurn };
 
 class Card {
     public:
+        void printCard();
+        std::string colorToString(bonusColor color) const;
+        std::string abilityToString(ability ability) const;
+
         // --- Constructors ---
-        Card() {}
+        Card() {};
         Card(int newId, std::array<int, 7> newCost, bonusColor newColor,
             ability newAbility, int newBonus, int newPoints, int newCrowns)
             : id(newId), cost(newCost), color(newColor),
             cardAbility(newAbility), bonusGems(newBonus),
             points(newPoints), crowns(newCrowns) {
-        }
+        };
 
         // --- Id ---
-        int getId() const { return id; }
-        void setId(int newId) { id = newId; }
+        int getId() const { return id; };
+        void setId(int newId) { id = newId; };
 
         // --- Cost ---
-        std::array<int, 7> getCost() const { return cost; }
-        void setCost(std::array<int, 7> newCost) { cost = newCost; }
+        std::array<int, 7> getCost() const { return cost; };
+        void setCost(std::array<int, 7> newCost) { cost = newCost; };
 
         // --- Color & Ability ---
-        bonusColor getColor() const { return color; }
-        void setColor(bonusColor newColor) { color = newColor; }
-        ability getAbility() const { return cardAbility; }
-        void setAbility(ability newAbility) { cardAbility = newAbility; }
+        bonusColor getColor() const { return color; };
+        void setColor(bonusColor newColor) { color = newColor; };
+        ability getAbility() const { return cardAbility; };
+        void setAbility(ability newAbility) { cardAbility = newAbility; };
 
         // --- Stats ---
-        int getBonusGems() const { return bonusGems; }
-        void setBonusGems(int newBonus) { bonusGems = newBonus; }
-        int getPoints() const { return points; }
-        void setPoints(int newPoints) { points = newPoints; }
-        int getCrowns() const { return crowns; }
-        void setCrowns(int newCrowns) { crowns = newCrowns; }
+        int getBonusGems() const { return bonusGems; };
+        void setBonusGems(int newBonus) { bonusGems = newBonus; };
+        int getPoints() const { return points; };
+        void setPoints(int newPoints) { points = newPoints; };
+        int getCrowns() const { return crowns; };
+        void setCrowns(int newCrowns) { crowns = newCrowns; };
 
         // --- Comparators ---
         bool operator<(const Card& other) const {
@@ -66,11 +70,11 @@ class Card {
                 return static_cast<int>(this->color) < static_cast<int>(other.color);
             }
             return this->points < other.points;
-        }
+        };
 
     private:
         int id = 0;
-        std::array<int, 7> cost = {};
+        std::array<int, 7> cost = {}; //Red, Green, Blue, White, Black, Pearl, (gold but cards don't have this in cost)
         bonusColor color = bonusColor::Wild;
         ability cardAbility = ability::None;
         int bonusGems = 0;
@@ -78,4 +82,4 @@ class Card {
         int crowns = 0;
 };
 
-#endif
+#endif //CARD_H

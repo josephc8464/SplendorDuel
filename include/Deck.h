@@ -24,6 +24,8 @@ class Deck {
 	public:
 		Deck() {};
 		Deck(std::vector<Card> chosenDeck) { cards = chosenDeck; };
+
+		void loadFromCSV(std::string filename);
 		void shuffle();
 		Card drawCard();
 		void reset();

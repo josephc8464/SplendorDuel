@@ -1,6 +1,43 @@
 #include "../include/Game.h"
+#include <cctype>
+#include <iostream>
+#include <limits>
 
 using std::cout, std::endl, std::cin;
+
+namespace 
+{
+
+	/*
+	* @brief Function to validate player names. No restrictions on player names.
+	* 
+	* @author Joseph Corella
+	* @date 2026-03-15
+	*/
+	std::string askForPlayerName(std::string playerNum) {
+		std::string playerName;
+		char response;
+
+		do {
+			std::cout << "Please enter player " << playerNum << " name: ";
+			std::cin >> playerName;
+
+			do {
+				std::cout << "You entered " << playerName << ". Confirm name? (Y/N): ";
+				std::cin >> response;
+
+				//Clear the stream
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+				response = std::toupper(response);
+			} while (response != 'Y' && response != 'N');
+
+		} while (response == 'N');
+
+		return playerName;
+	}
+}
 
 /*
 * @brief Checks if a player has satisfied one of three win conditions.
@@ -80,20 +117,38 @@ void Game::performOptionalAction(int pIndx) {
 * @date 2026-03-14
 */
 void Game::startGame() {
+
+	//Set player names
 	std::string name1, name2;
 
-	cout << "Starting Game..." << endl;
+	/*
+	name1 = askForPlayerName("1");
+	name2 = askForPlayerName("2");
 
-	
-	cout << "Player 1 name: " << endl;
-	cin >> name1;
-	
-	cout << "Player 2 name: " << endl;
-	cin >> name2;
-	
 	players.at(0).setName(name1);
 	players.at(1).setName(name2);
+	*/
+	
+	//Refill Bag, and disperse tokens onto board
+	std::vector<ColorEnum> tempBag;
 
+	for (int i = 0; i < 4; i++) { // Adjusted loop to 4 iterations (4*5 = 20)
+		tempBag.push_back(ColorEnum::Red);
+		tempBag.push_back(ColorEnum::Green);
+		tempBag.push_back(ColorEnum::Blue);
+		tempBag.push_back(ColorEnum::Black);
+		tempBag.push_back(ColorEnum::White);
+	}
+	tempBag.push_back(ColorEnum::Gold);
+	tempBag.push_back(ColorEnum::Gold);
+	tempBag.push_back(ColorEnum::Gold);
+	tempBag.push_back(ColorEnum::Pearl);
+	tempBag.push_back(ColorEnum::Pearl);
+
+	board.setBagOfTokens(tempBag);
+	board.refillGrid();
+	
+	board.getTier1DeckCard().loadFromCSV("deck/royalCards.csv");
 
 	std::cout << R"(
    _____  _____  _      ______ _   _ _____   ____  _____  

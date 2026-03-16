@@ -120,11 +120,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="deck\royalCards.csv">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="deck\secondTier.csv">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="deck\thirdTier.csv">
+      <FileType>Document</FileType>
+    </None>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\card.cpp" />
     <ClCompile Include="src\Deck.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="tests\test_player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Board.h" />
@@ -137,6 +147,9 @@
     <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier1.png" />
     <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier2.png" />
     <Image Include="..\..\..\OneDrive\Pictures\Screenshots 1\Tier3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="deck\firstTier.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

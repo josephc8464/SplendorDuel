@@ -65,7 +65,7 @@ class Player {
 
     private:
         std::string name;
-        std::array<int, 7> tokens = {0,0,0,0,0,0,0};
+        std::array<int, 7> tokens = {0,0,0,0,0,0,0}; //Red, Green, Blue, White, Black, Pearl, Gold
         std::array<int, 7> bonus = {0,0,0,0,0,0,0};
         int totalPoints = 0;
         int crowns = 0;
