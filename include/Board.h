@@ -54,7 +54,11 @@ class Board {
         }
 
         //getters, setters
-
+        
+        // --- Royals ---
+        std::array<Card, 4> getRoyals() const{ return royals; }
+        void setRoyals(std::array<Card, 4> newRoyals) { royals = newRoyals; }
+        
         // --- Tier Decks ---
         Deck getTier1DeckCard() const { return tier1Cards; }
         void setTier1DeckCard(Deck deck) { tier1Cards = deck; }
