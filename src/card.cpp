@@ -1,8 +1,59 @@
 #include "../include/Card.h"
 #include <iostream>
+#include <iomanip>
 #include <vector>
+#include <sstream>
 
 using std::cout, std::endl;
+
+std::vector<std::string> Card::getCardLines() const {
+    const int WIDTH = 19;
+    std::vector<std::string> lines;
+    std::vector<std::string> costColors = { "Red", "Green", "Blue", "White", "Black", "Gold", "Pearl" };
+
+    // Helper to wrap text in * * and pad with spaces to exactly WIDTH
+    auto format = [&](std::string text) {
+        std::stringstream ss;
+        ss << "* " << std::left << std::setw(WIDTH - 4) << text << " *";
+        return ss.str();
+        };
+
+    // 1. Top Border
+    lines.push_back(std::string(WIDTH, '*'));
+
+    // 2. Points and Bonus
+    std::string header = std::to_string(points) + " P.   " + std::to_string(bonusGems) + " " + colorToString(color);
+    lines.push_back(format(header));
+
+    // 3. Ability
+    lines.push_back(format(abilityToString(cardAbility)));
+
+    // 4. Crowns
+    lines.push_back(format(std::to_string(crowns) + " Crowns"));
+
+    // 5. Spacer & Cost Header
+    lines.push_back(format(""));
+    lines.push_back(format("-Cost-"));
+
+    // 6. Costs (Dynamic)
+    int costLines = 0;
+    for (int i = 0; i < 7; i++) {
+        if (cost.at(i) > 0) {
+            lines.push_back(format(costColors[i] + ": " + std::to_string(cost.at(i))));
+            costLines++;
+        }
+    }
+
+    // 7. Padding (Ensures every card is the same height: 12 lines total)
+    while (lines.size() < 11) {
+        lines.push_back(format(""));
+    }
+
+    // 8. Bottom Border
+    lines.push_back(std::string(WIDTH, '*'));
+
+    return lines;
+}
 
 /*
 * @brief Prints the details of a card in the terminal. 
@@ -11,18 +62,44 @@ using std::cout, std::endl;
 * @date 2026-03-15
 */
 void Card::printCard() {
-    cout << "------------------" << endl;
-    cout << "Color: " << colorToString(color) << endl;
-    cout << "Ability: " << abilityToString(cardAbility) << endl;
-    cout << "Points: " << points << endl;
-    cout << "Crowns: " << crowns << endl;
+    const int CARD_WIDTH = 19;
     std::vector<std::string> costColors = { "Red", "Green", "Blue", "White", "Black", "Pearl" };
 
-    cout << endl << "-Cost-" << endl;
+    // Helper to print a line with a border
+    auto printLine = [&](std::string leftText, std::string rightText = "") {
+        std::cout << "* " << std::left << std::setw(CARD_WIDTH - 4) << (leftText + rightText) << " *" << std::endl;
+        };
 
-    for(int i=0; i<6; i++) { 
-        cout << costColors.at(i) << ": " << cost.at(i) << endl;
+    std::cout << std::string(CARD_WIDTH, '*') << std::endl;
+
+    // Header: Points, Bonus, and Color
+    // Format: "P. [pts]    [bonus] [color]"
+    std::string stats = std::to_string(points) + " P.   " + std::to_string(bonusGems) + " " + colorToString(color);
+    printLine(stats);
+
+    // Ability and Crowns
+    printLine(abilityToString(cardAbility));
+    printLine(std::to_string(crowns) + " Crowns");
+
+    // Divider
+    printLine("");
+    printLine("-Cost-");
+
+    // Costs
+    int linesPrinted = 0;
+    for (int i = 0; i < 6; i++) {
+        if (cost.at(i) > 0) {
+            printLine(costColors.at(i) + ": ", std::to_string(cost.at(i)));
+            linesPrinted++;
+        }
     }
+
+    // Fill empty space to keep card height consistent (5 lines for cost area)
+    for (int i = linesPrinted; i < 5; i++) {
+        printLine("");
+    }
+
+    std::cout << std::string(CARD_WIDTH, '*') << std::endl;
 }
 
 /*
