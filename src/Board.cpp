@@ -4,6 +4,13 @@
 #include <algorithm>
 #include <iomanip>
 
+/*
+* @brief Print out one row of a vector of Cards. (each card side-by-side)
+* - Helper for printing board function.
+*  
+* @author Joseph Corella
+* @date 2026-03-19
+*/
 void Board::printRow(const std::vector<Card>& row, std::string label) const {
 	if (row.empty()) return;
 

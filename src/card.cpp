@@ -6,6 +6,13 @@
 
 using std::cout, std::endl;
 
+/*
+* @brief Helper function to implement printing functionality of vectors of cards
+* - Returns the printing lines of a card, so cards can be printed side-by-side
+* 
+* @author Joseph Corella
+* @date 2026-03-19
+*/
 std::vector<std::string> Card::getCardLines() const {
     const int WIDTH = 19;
     std::vector<std::string> lines;
