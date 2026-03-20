@@ -35,7 +35,9 @@ class Board {
 
         //printing functions for testing
         void printBoard() const;
+        void printRow(const std::vector<Card>& row, std::string label) const;
 
+        void boardSetUp();
         void refillGrid();
         void resetBoard();
         std::vector<ColorEnum> takeTokens(std::vector<Position> gridPositions);

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <array>
+#include <vector>
 /*
 * @brief Holds the information of a card, including its gem color, points, cost, crowns, and ability.
 * 
@@ -29,7 +30,9 @@ enum class ability { None, StealAToken, GetPrivilege, TakeAToken, TakeAnotherTur
 
 class Card {
     public:
+        std::vector<std::string> getCardLines() const;
         void printCard();
+
         std::string colorToString(bonusColor color) const;
         std::string abilityToString(ability ability) const;
 
